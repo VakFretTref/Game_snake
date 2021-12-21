@@ -3,25 +3,38 @@
 #include <cmath>
 #include <ctime>
 
-float GineretApple()
+float GineretСordenate()
 {
     return round((2 * (float)rand() / RAND_MAX - 1) * 10) / 10;
 }
-//трава на задний фон и затемнение фона
-float x_apple = GineretApple(), 
-      y_apple = GineretApple(),
-      xt[289], yt[289]; //кардинаты тела
+
 char nap; //напровление
 int h, //длинна змемйки
     Ri; //угол поворота головы (графика)
-bool Q = true;
-struct GRE
+
+struct obj
 {
     float x, 
           y;
-} gre[82];
+} gren[93], bodySnake[289], apple;
 
-void dravGreen(GRE gre2)
+void GineretApple()
+{
+    apple.x = GineretСordenate();
+    apple.y = GineretСordenate();
+
+    //дебаг спавна яблок "в теле" И за картой
+    for (int i = 0; i <= h; i++)
+    {
+        if ((apple.x == round(bodySnake[i].x * 10) / 10) || (apple.x > 0.9) || (apple.x < -0.9))
+            apple.x = GineretСordenate();
+
+        if ((apple.y == round(bodySnake[i].y * 10) / 10) || (apple.y > 0.9) || (apple.y < -0.9))
+            apple.y = GineretСordenate();
+    }
+}
+
+void dravGreen(obj gre2)
 {
     glPushMatrix();
     glTranslatef(gre2.x, gre2.y, 0);
@@ -69,22 +82,22 @@ void DravHead()
     switch (Ri)
     {
     case 90:
-        glTranslatef(xt[0] + .1, yt[0], 0);
+        glTranslatef(bodySnake[0].x + .1, bodySnake[0].y, 0);
         break;
     case 180:
-        glTranslatef(xt[0] + .1, yt[0] + .1, 0);
+        glTranslatef(bodySnake[0].x + .1, bodySnake[0].y + .1, 0);
         break;
     case 270:
-        glTranslatef(xt[0], yt[0] + .1, 0);
+        glTranslatef(bodySnake[0].x, bodySnake[0].y + .1, 0);
         break;
     default:
-        glTranslatef(xt[0], yt[0], 0);
+        glTranslatef(bodySnake[0].x, bodySnake[0].y, 0);
     }
     glRotatef(Ri, 0, 0, 1);
 
     glBegin(GL_QUADS);
 
-    glColor3f(.09, 1, .09);
+    glColor3f(.08, 1, .07);
     glVertex2f(0, 0);
     glVertex2f(0, .1);
     glVertex2f(.1, .1);
@@ -105,13 +118,13 @@ void DravHead()
     glPopMatrix();
 }
 
-void DravBady(float xT, float yT)
+void DravBody(obj body)
 {
     glPushMatrix();
-    glTranslatef(xT, yT, 0);
+    glTranslatef(body.x, body.y, 0);
     glBegin(GL_QUADS);
 
-    glColor3f(.2, .9, .4);
+    glColor3f(.25, .95, .4);
     glVertex2f(.01, .01);
     glVertex2f(.01, .09);
     glVertex2f(.09, .09);
@@ -124,7 +137,7 @@ void DravBady(float xT, float yT)
 void DravApple()
 {
     glPushMatrix();
-    glTranslatef(x_apple, y_apple, 0);
+    glTranslatef(apple.x, apple.y, 0);
     glBegin(GL_QUADS);
 
     glColor3f(1, .1, .1);
@@ -164,18 +177,15 @@ void Dead()
 {
     for (int i = h; i >= 0; i--)
     {
-        xt[i] = 0;
-        yt[i] = 0;
+        bodySnake[i].x = 0;
+        bodySnake[i].y = 0;
     }
-    if (Q)
+    for (int i = 0; i < 93; i++)
     {
-        for (int i = 0; i < 82; i++)
-        {
-            gre[i].x = GineretApple();
-            gre[i].y = GineretApple();
-        }
-        Q = false;
+        gren[i].x = GineretСordenate();
+        gren[i].y = GineretСordenate();
     }
+    GineretApple();
     h = 3;
     Ri = 0;
     nap = NULL;
@@ -185,68 +195,47 @@ void tik(int n)
 {
     for (int i = h; i > 0; i--)
     {
-        xt[i] = xt[i - 1];
-        yt[i] = yt[i - 1];
+        bodySnake[i].x = bodySnake[i - 1].x;
+        bodySnake[i].y = bodySnake[i - 1].y;
     }
 
     //движение по напровлению
     switch (nap)
     {
     case 'w':
-        yt[0] += .1;
+        bodySnake[0].y += .1;
         Ri = 0;
         break;
     case 's':
-        yt[0] -= .1;
+        bodySnake[0].y -= .1;
         Ri = 180;
         break;
     case 'd':
-        xt[0] += .1;
+        bodySnake[0].x += .1;
         Ri = 270;
         break;
     case 'a':
-        xt[0] -= .1;
+        bodySnake[0].x -= .1;
         Ri = 90;
         break;
     }
 
     //подбор яблока и поевление нового
-    if ((round(xt[0] * 10)/10 == x_apple) && (round(yt[0] * 10) / 10 == y_apple))
+    if ((round(bodySnake[0].x * 10)/10 == apple.x) && (round(bodySnake[0].y * 10) / 10 == apple.y))
     {
         h++;
-        x_apple = GineretApple();
-        y_apple = GineretApple();
-
-        //дебаг спавна яблок "в теле" И за картой
-        for (int i = 0; i <= h; i++)
-        {
-            if ((x_apple == xt[i]) || (x_apple >= 1) || (x_apple <= -1))
-                x_apple = GineretApple();
-
-            if ((y_apple == yt[i]) || (y_apple >= 1) || (y_apple <= -1)) 
-                y_apple = GineretApple();
-        }
+        GineretApple();
     }
 
     //смерти от стены
-    if ((xt[0] >= 1) || (xt[0] <= -1.1) || (yt[0] >= 1) || (yt[0] <= -1.1))
-    {
-        Dead();
-        Q = true;
-    }
-
-    /*  
-    // Альтернотивные правила _ открытое поле
-    if (xt[0] >= 1) xt[0] = (float)-1;
-    if (xt[0] <= -1.1) xt[0] = (float)1;
-    if (yt[0] >= 1) yt[0] = (float)-1;
-    if (yt[0] <= -1.1) yt[0] = (float)1;
-    */
+    if ((bodySnake[0].x >= 1) || (bodySnake[0].x <= -1.1) || (bodySnake[0].y >= 1) || (bodySnake[0].y <= -1.1)) Dead();
 
     //смерть от тела
     for (int i = 1; i <= h; i++)
-        if ((xt[0] == xt[i]) && (yt[0] == yt[i]))
-            Dead();
+        if ((bodySnake[0].x == bodySnake[i].x) && (bodySnake[0].y == bodySnake[i].y))
+            if (nap != NULL)
+                Dead();
+
     glutPostRedisplay();
     glutTimerFunc(100, tik, 0);
 }
@@ -260,12 +249,8 @@ void processKeys(unsigned char key, int x, int y)
     if ((key == 97 || key == 244) && (nap != 'd')) nap = 'a';
     if ((key == 119 || key == 246) && (nap != 's')) nap = 'w';
     if ((key == 115 || key == 251) && (nap != 'w')) nap = 's';
-    
-    if (key == 114 || key == 234)
-    {
-        Q = true;
-        Dead();//рецтарт
-    }
+    //рецтарт
+    if (key == 114 || key == 234) Dead();
 
     glutPostRedisplay();
 }
@@ -290,13 +275,16 @@ void renderScene(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // эта функция должна быть первой в renderScene
 
     Fon();
-    for (int i = 0; i < 82; i++)
-        dravGreen(gre[i]);
+
+    for (int i = 0; i < 93; i++)
+        dravGreen(gren[i]);
+
     for (int i = 1; i < h; i++)
-        DravBady(xt[i], yt[i]);
+        DravBody(bodySnake[i]);
+
     DravHead();
+
     DravApple();
-    
 
     glutSwapBuffers(); // эта функция должна быть последний в renderScene
 }
