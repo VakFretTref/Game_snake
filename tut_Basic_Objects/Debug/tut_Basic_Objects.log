@@ -12,10 +12,10 @@ C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(54,23):
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(55,27): warning C4305: аргумент: усечение из "double" в "GLfloat"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(56,24): warning C4305: аргумент: усечение из "double" в "GLfloat"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(67,25): warning C4305: аргумент: усечение из "double" в "GLfloat"
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(85,37): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(88,58): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(88,37): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(91,53): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(85,33): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(88,50): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(88,33): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(91,45): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(96,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(100,26): warning C4305: аргумент: усечение из "double" в "GLfloat"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(102,21): warning C4305: аргумент: усечение из "double" в "GLfloat"
@@ -57,9 +57,9 @@ C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(167,26)
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(168,26): warning C4305: аргумент: усечение из "double" в "GLfloat"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(169,26): warning C4305: аргумент: усечение из "double" в "GLfloat"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(170,26): warning C4305: аргумент: усечение из "double" в "GLfloat"
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(206,29): warning C4305: +=: усечение из "double" в "float"
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(210,29): warning C4305: -=: усечение из "double" в "float"
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(214,29): warning C4305: +=: усечение из "double" в "float"
-C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(218,29): warning C4305: -=: усечение из "double" в "float"
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(206,25): warning C4305: +=: усечение из "double" в "float"
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(210,25): warning C4305: -=: усечение из "double" в "float"
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(214,25): warning C4305: +=: усечение из "double" в "float"
+C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(218,25): warning C4305: -=: усечение из "double" в "float"
 C:\Users\Win10Pro\Documents\GitHub\Game_snake\tut_Basic_Objects\main.cpp(260,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   tut_Basic_Objects.vcxproj -> C:\Users\Win10Pro\Documents\GitHub\Game_snake\Debug\tut_Basic_Objects.exe

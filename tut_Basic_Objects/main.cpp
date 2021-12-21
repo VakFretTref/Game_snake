@@ -16,7 +16,7 @@ struct obj
 {
     float x, 
           y;
-} gren[93], bodySnake[289], apple;
+} gren[93], Snake[289], apple;
 
 void GineretApple()
 {
@@ -26,18 +26,18 @@ void GineretApple()
     //дебаг спавна яблок "в теле" И за картой
     for (int i = 0; i <= h; i++)
     {
-        if ((apple.x == round(bodySnake[i].x * 10) / 10) || (apple.x > 0.9) || (apple.x < -0.9))
+        if ((apple.x == round(Snake[i].x * 10) / 10) || (apple.x > 0.9) || (apple.x < -0.9))
             apple.x = GineretСordenate();
 
-        if ((apple.y == round(bodySnake[i].y * 10) / 10) || (apple.y > 0.9) || (apple.y < -0.9))
+        if ((apple.y == round(Snake[i].y * 10) / 10) || (apple.y > 0.9) || (apple.y < -0.9))
             apple.y = GineretСordenate();
     }
 }
 
-void dravGreen(obj gre2)
+void dravGreen(obj grass)
 {
     glPushMatrix();
-    glTranslatef(gre2.x, gre2.y, 0);
+    glTranslatef(grass.x, grass.y, 0);
     glBegin(GL_TRIANGLES);
 
     glColor3f(.3, .7, .2);
@@ -82,16 +82,16 @@ void DravHead()
     switch (Ri)
     {
     case 90:
-        glTranslatef(bodySnake[0].x + .1, bodySnake[0].y, 0);
+        glTranslatef(Snake[0].x + .1, Snake[0].y, 0);
         break;
     case 180:
-        glTranslatef(bodySnake[0].x + .1, bodySnake[0].y + .1, 0);
+        glTranslatef(Snake[0].x + .1, Snake[0].y + .1, 0);
         break;
     case 270:
-        glTranslatef(bodySnake[0].x, bodySnake[0].y + .1, 0);
+        glTranslatef(Snake[0].x, Snake[0].y + .1, 0);
         break;
     default:
-        glTranslatef(bodySnake[0].x, bodySnake[0].y, 0);
+        glTranslatef(Snake[0].x, Snake[0].y, 0);
     }
     glRotatef(Ri, 0, 0, 1);
 
@@ -177,8 +177,8 @@ void Dead()
 {
     for (int i = h; i >= 0; i--)
     {
-        bodySnake[i].x = 0;
-        bodySnake[i].y = 0;
+        Snake[i].x = 0;
+        Snake[i].y = 0;
     }
     for (int i = 0; i < 93; i++)
     {
@@ -195,44 +195,44 @@ void tik(int n)
 {
     for (int i = h; i > 0; i--)
     {
-        bodySnake[i].x = bodySnake[i - 1].x;
-        bodySnake[i].y = bodySnake[i - 1].y;
+        Snake[i].x = Snake[i - 1].x;
+        Snake[i].y = Snake[i - 1].y;
     }
 
     //движение по напровлению
     switch (nap)
     {
     case 'w':
-        bodySnake[0].y += .1;
+        Snake[0].y += .1;
         Ri = 0;
         break;
     case 's':
-        bodySnake[0].y -= .1;
+        Snake[0].y -= .1;
         Ri = 180;
         break;
     case 'd':
-        bodySnake[0].x += .1;
+        Snake[0].x += .1;
         Ri = 270;
         break;
     case 'a':
-        bodySnake[0].x -= .1;
+        Snake[0].x -= .1;
         Ri = 90;
         break;
     }
 
     //подбор яблока и поевление нового
-    if ((round(bodySnake[0].x * 10)/10 == apple.x) && (round(bodySnake[0].y * 10) / 10 == apple.y))
+    if ((round(Snake[0].x * 10)/10 == apple.x) && (round(Snake[0].y * 10) / 10 == apple.y))
     {
         h++;
         GineretApple();
     }
 
     //смерти от стены
-    if ((bodySnake[0].x >= 1) || (bodySnake[0].x <= -1.1) || (bodySnake[0].y >= 1) || (bodySnake[0].y <= -1.1)) Dead();
+    if ((Snake[0].x >= 1) || (Snake[0].x <= -1.1) || (Snake[0].y >= 1) || (Snake[0].y <= -1.1)) Dead();
 
     //смерть от тела
     for (int i = 1; i <= h; i++)
-        if ((bodySnake[0].x == bodySnake[i].x) && (bodySnake[0].y == bodySnake[i].y))
+        if ((Snake[0].x == Snake[i].x) && (Snake[0].y == Snake[i].y))
             if (nap != NULL)
                 Dead();
 
@@ -280,7 +280,7 @@ void renderScene(void) {
         dravGreen(gren[i]);
 
     for (int i = 1; i < h; i++)
-        DravBody(bodySnake[i]);
+        DravBody(Snake[i]);
 
     DravHead();
 
